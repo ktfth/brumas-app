@@ -67,6 +67,9 @@ class App extends React.Component {
         <header className="App-header">
           <div class="weather-focus">
             <p>
+            {`Local: ${this.state.data.name}`}
+            </p>
+            <p>
             {`Temperatura atual: ${this.state.data.main.temp} °C`}
             </p>
             <p>
@@ -74,7 +77,7 @@ class App extends React.Component {
             </p>
             {this.weatherDescription()}
             <p>
-            {`Humidade: ${this.state.data.main.humidity}%`}
+            {`Umidade: ${this.state.data.main.humidity}%`}
             </p>
             <p>
             {`Velocidade do vento: ${this.state.data.wind.speed} metros/seg`}
