@@ -11,7 +11,11 @@ class App extends React.Component {
         feels_like: '0',
         humidity: '0',
       },
-      weather: []
+      weather: [],
+      wind: {
+        speed: '0',
+        deg: '0',
+      }
     };
 
     this.fetchWeatherData = this.fetchWeatherData.bind(this);
@@ -61,16 +65,24 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          <p>
-          {`Temperatura atual: ${this.state.data.main.temp} °C`}
-          </p>
-          <p>
-          {`Sensação termica: ${this.state.data.main.feels_like} °C`}
-          </p>
-          {this.weatherDescription()}
-          <p>
-          {`Humidade: ${this.state.data.main.humidity}%`}
-          </p>
+          <div class="weather-focus">
+            <p>
+            {`Temperatura atual: ${this.state.data.main.temp} °C`}
+            </p>
+            <p>
+            {`Sensação termica: ${this.state.data.main.feels_like} °C`}
+            </p>
+            {this.weatherDescription()}
+            <p>
+            {`Humidade: ${this.state.data.main.humidity}%`}
+            </p>
+            <p>
+            {`Velocidade do vento: ${this.state.data.wind.speed} metros/seg`}
+            </p>
+            <p>
+            {`Orientação do vento: ${this.state.data.wind.deg}°`}
+            </p>
+          </div>
         </header>
       </div>
     );
