@@ -10,15 +10,17 @@ class App extends React.Component {
         temp: '0',
         feels_like: '0',
         humidity: '0',
-      }
+      },
+      weather: []
     };
 
     this.fetchWeatherData = this.fetchWeatherData.bind(this);
+    this.weatherDescription = this.weatherDescription.bind(this);
   }
 
   fetchWeatherData(opts={}) {
     console.log('Start to load data...');
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${opts.lat}&lon=${opts.lon}&units=metric&appid=3590ab562c40856043d36a098484811b`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${opts.lat}&lon=${opts.lon}&units=metric&lang=pt_br&appid=3590ab562c40856043d36a098484811b`)
       .then(res => res.json())
       .then(data => {
         console.log(data);
@@ -45,6 +47,16 @@ class App extends React.Component {
     }
   }
 
+  weatherDescription() {
+    return this.state.data.weather.map((v) => {
+      return (
+        <p key="{`${v.id}`}">
+        {`${v.description}`}
+        </p>
+      );
+    });
+  }
+
   render() {
     return (
       <div className="App">
@@ -55,6 +67,7 @@ class App extends React.Component {
           <p>
           {`Sensação termica: ${this.state.data.main.feels_like} °C`}
           </p>
+          {this.weatherDescription()}
           <p>
           {`Humidade: ${this.state.data.main.humidity}%`}
           </p>
