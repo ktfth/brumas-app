@@ -6,6 +6,7 @@ class App extends React.Component {
     super(props);
     this.state = {};
     this.state.data = {
+      name: '',
       main: {
         temp: '0',
         feels_like: '0',
@@ -65,7 +66,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          <div class="weather-focus">
+          <div className="weather-focus">
             <p>
             {`Local: ${this.state.data.name}`}
             </p>
