@@ -50,7 +50,7 @@ class App extends React.Component {
   weatherDescription() {
     return this.state.data.weather.map((v) => {
       return (
-        <p key="{`${v.id}`}">
+        <p key={`${v.id}`}>
         {`${v.description}`}
         </p>
       );
