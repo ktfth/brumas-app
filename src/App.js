@@ -56,7 +56,7 @@ class App extends React.Component {
     return this.state.data.weather.map((v) => {
       return (
         <p key={`${v.id}`}>
-				<img src={`http://openweathermap.org/img/wn/${v.icon}.png`}></img>
+				<img src={`http://openweathermap.org/img/wn/${v.icon}.png`} alt="Representação das condições do tempo atualmente"></img>
 				<br />
         {`${v.description}`}
         </p>
