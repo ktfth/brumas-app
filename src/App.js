@@ -25,7 +25,13 @@ class App extends React.Component {
 
   fetchWeatherData(opts={}) {
     console.log('Start to load data...');
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${opts.lat}&lon=${opts.lon}&units=metric&lang=pt_br&appid=3590ab562c40856043d36a098484811b`)
+		let url = ``;
+		if ('location' in opts) {
+			url = `https://api.openweathermap.org/data/2.5/weather?q=${opts.location}&units=metric&lang=pt_br&appid=3590ab562c40856043d36a098484811b`;
+		} else if ('lat' in opts && 'lon' in opts) {
+			url = `https://api.openweathermap.org/data/2.5/weather?lat=${opts.lat}&lon=${opts.lon}&units=metric&lang=pt_br&appid=3590ab562c40856043d36a098484811b`;
+		}
+		fetch(url)
       .then(res => res.json())
       .then(data => {
         console.log(data);
@@ -64,10 +70,28 @@ class App extends React.Component {
     });
   }
 
+	locationHandler(event) {
+		const self = this;
+		if (event.key === 'Enter') {
+			self.fetchWeatherData({
+				location: event.target.value,
+			});
+			setInterval(() => self.fetchWeatherData({
+				location: event.target.value,
+			}), 1000*60);
+		}
+	}
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
+					<input
+						className="location"
+						type="text"
+						placeholder="Localização"
+						onKeyPress={(e) => this.locationHandler(e)}
+					/>
           <div className="weather-focus">
             <p>
             {`Local: ${this.state.data.name}`}
