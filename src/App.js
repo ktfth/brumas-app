@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 
+import {FacebookShareButton, FacebookIcon} from "react-share";
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -70,6 +72,18 @@ class App extends React.Component {
     });
   }
 
+	socialMediaButtons(props) {
+		return (
+		 <FacebookShareButton
+		    url={"https://brumas-app.vercel.app"}
+		    quote={"Brumas App - Acompanhe o tempo da qualquer lugar"}
+		    hashtag="#keephacking"
+		    className={"shareButton"}>
+		     <FacebookIcon size={36} />
+		  </FacebookShareButton>
+		);
+	}
+
 	locationHandler(event) {
 		const self = this;
 		if (event.key === 'Enter') {
@@ -112,6 +126,10 @@ class App extends React.Component {
             <p>
             {`Orientação do vento: ${this.state.data.wind.deg}°`}
             </p>
+
+						<p>
+						{this.socialMediaButtons()}
+						</p>
           </div>
         </header>
       </div>
