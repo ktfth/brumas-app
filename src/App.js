@@ -3,10 +3,13 @@ import './App.css';
 
 import {FacebookShareButton, FacebookIcon} from "react-share";
 
+import { ThemeProvider, createTheme, Arwes, Frame } from 'arwes';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+		this.state.show = true;
     this.state.data = {
       name: '',
       main: {
@@ -98,41 +101,56 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-					<input
-						className="location"
-						type="text"
-						placeholder="Localização"
-						onKeyPress={(e) => this.locationHandler(e)}
-					/>
-          <div className="weather-focus">
-            <p>
-            {`Local: ${this.state.data.name}`}
-            </p>
-            <p>
-            {`Temperatura atual: ${this.state.data.main.temp} °C`}
-            </p>
-            <p>
-            {`Sensação termica: ${this.state.data.main.feels_like} °C`}
-            </p>
-            {this.weatherDescription()}
-            <p>
-            {`Umidade: ${this.state.data.main.humidity}%`}
-            </p>
-            <p>
-            {`Velocidade do vento: ${this.state.data.wind.speed} metros/seg`}
-            </p>
-            <p>
-            {`Orientação do vento: ${this.state.data.wind.deg}°`}
-            </p>
+			<ThemeProvider theme={createTheme()}>
+				<Arwes>
+					<div className={`App`}>
+						<div className={`App-header`}>
+							<input
+								className="location"
+								type="text"
+								placeholder="Localização"
+								onKeyPress={(e) => this.locationHandler(e)}
+							/>
 
-						<p>
-						{this.socialMediaButtons()}
-						</p>
-          </div>
-        </header>
-      </div>
+							<div style={{ display: 'inline-block', padding: '20px' }}>
+                    <Frame
+                        show={this.state.show}
+                        animate={true}
+                        level={3}
+                        corners={4}
+                        layer='primary'
+                    >
+                        <div style={{ padding: '20px 40px', fontSize: '32px' }}>
+													<p>
+													{`Local: ${this.state.data.name}`}
+													</p>
+													<p>
+													{`Temperatura atual: ${this.state.data.main.temp} °C`}
+													</p>
+													<p>
+													{`Sensação termica: ${this.state.data.main.feels_like} °C`}
+													</p>
+													{this.weatherDescription()}
+													<p>
+													{`Umidade: ${this.state.data.main.humidity}%`}
+													</p>
+													<p>
+													{`Velocidade do vento: ${this.state.data.wind.speed} metros/seg`}
+													</p>
+													<p>
+													{`Orientação do vento: ${this.state.data.wind.deg}°`}
+													</p>
+
+													<p>
+													{this.socialMediaButtons()}
+													</p>
+                        </div>
+                    </Frame>
+                </div>
+						</div>
+					</div>
+				</Arwes>
+			</ThemeProvider>
     );
   }
 }
